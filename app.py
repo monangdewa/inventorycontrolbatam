@@ -87,6 +87,8 @@ if not st.session_state.logged_in:
             st.error("Username atau Password salah. Silakan coba lagi.")
             
     # --- TAMBAHAN KODE COPYRIGHT DI SINI ---
+    <b><b><b><b><b><b>
+    <b><b><b><b><b></b>
     st.write("---")
     st.markdown(
         """
