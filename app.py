@@ -96,8 +96,8 @@ else:
         logout()
 
     # --- DASHBOARD ADMIN ---
-    if st.session_state.role == "Admin":
-        st.title("🖥️ Admin")
+    if st.session_state.role == "Adm_ICBTM":
+        st.title("🖥️ Adm_ICBTM")
         tab1, tab2, tab3 = st.tabs(["📁 Upload & Kelola CSV", "📸 Cek & Edit Bukti Foto IC", "🔆 Cek Rusak Pabrik (Toko)"])
         
         with tab1:
@@ -179,7 +179,7 @@ else:
                             st.rerun()
 
     # ---  IC BATAM ---
-    elif st.session_state.role == "IC Upload":
+    elif st.session_state.role == "IC_Batam":
         st.title("📤 IC BATAM")
         tab1, tab2 = st.tabs(["📌 Upload FU NBH", "🔆 Cek Rusak Pabrik (Toko)"])
         
@@ -249,7 +249,7 @@ else:
                             st.image(rp['foto_barang'], width=200)
 
     # --- TOKO KEPRI ---
-    elif st.session_state.role == "Toko":
+    elif st.session_state.role == "Toko_Kepri":
         st.title("🏪 Toko BTM-BTN-TJP")
         
         st.subheader("Pengaturan Akses Toko")
