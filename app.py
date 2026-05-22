@@ -87,13 +87,13 @@ if not st.session_state.logged_in:
             st.error("Username atau Password salah. Silakan coba lagi.")
             
     # --- TAMBAHAN KODE COPYRIGHT DI SINI ---
-    <b><b><b><b><b><b>
-    <b><b><b><b><b></b>
+<p
+</p>
     st.write("---")
     st.markdown(
         """
         <p style='text-align: center; color: gray; font-size: 13px;'>
-            👮🏻‍♂️ Inventory Control - Batam 🥇</p>
+            👮🏻‍♂️  Inventory Control - Batam 🥇</p>
         """, 
         unsafe_allow_html=True
     )
