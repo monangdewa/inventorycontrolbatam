@@ -70,7 +70,7 @@ def logout():
 # ==========================================
 if not st.session_state.logged_in:
     st.title("💻 IC BATAM")
-    st.subheader("Rekap Rusak Pabrik dan NBH")
+    st.write("Rekap Rusak Pabrik dan NBH")
     
     role_choice = st.selectbox("Jenis Login", ["Adm_ICBTM", "IC_Batam ", "Toko_Kepri"])
     username = st.text_input("Username")
