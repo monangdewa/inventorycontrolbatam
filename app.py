@@ -91,7 +91,7 @@ if not st.session_state.logged_in:
     st.markdown(
         """
         <p style='text-align: center; color: gray; font-size: 13px;'>
-            👮🏻‍♂️  Inventory Control - Batam 🥇</p>
+            👮  Inventory Control - Batam 🥇</p>
         """, 
         unsafe_allow_html=True
     )
@@ -214,8 +214,8 @@ else:
                         "image": img_file,
                         "status": "Selesai"
                     })
-                    st.success("Bukti berhasil diupload!")
-                    st.rerun()
+                    st.success("Bukti NBH berhasil dimasukkan! Silakan cek di menu riwayat.")
+                    # st.rerun() <-- DIHAPUS BIAR GAMBAR TIDAK INSTAN TER-RESET OLEH MEMORI STREAMLIT
                 else:
                     st.error("Mohon isi NBH dan upload foto.")
                     
@@ -241,7 +241,7 @@ else:
                                 st.warning("Data dihapus.")
                                 st.rerun()
 
-        # MENU BARU IC: MELIHAT RUSAK PABRIK
+        # MENU IC: MELIHAT RUSAK PABRIK
         with tab2:
             st.header("Pantau Foto Rusak Pabrik dari Toko")
             if not st.session_state.rusak_pabrik_uploads:
@@ -293,7 +293,7 @@ else:
             st.info("Fitur tampilan bukti chat toko.")
             st.text_area("Catatan/Pesan Toko ke Tim IC", placeholder="Tulis pesan di sini...")
 
-        # MENU BARU TOKO: INPUT RUSAK PABRIK & UPLOAD 2 FOTO
+        # MENU TOKO: INPUT RUSAK PABRIK & UPLOAD 2 FOTO
         with tab1:
             st.header("Form Input Rusak Pabrik")
             
