@@ -91,8 +91,8 @@ if not st.session_state.logged_in:
     st.markdown(
         """
         <p style='text-align: center; color: gray; font-size: 13px;'>
-            © 2026 IC BATAM.<br>
-            <span style='font-size: 11px;'>Inventory Control - BTM v2.0</span>
+            © 2026 IC BATAM<br>
+            <span style='font-size: 11px;'>Inventory Control - BTM</span>
         </p>
         """, 
         unsafe_allow_html=True
