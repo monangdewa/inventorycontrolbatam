@@ -191,9 +191,9 @@ else:
                     nbh_options = st.session_state.uploaded_data[kolom_nbh[0]].dropna().unique().tolist()
                     nbh_choice = st.selectbox("Pilih NBH", nbh_options)
                 else:
-                    nbh_choice = st.text_input("Masukkan NBH (Ketik Manual)")
+                    nbh_choice = st.text_input("Input Manual (KodeToko-NoNRB-Tgl NRB)")
             else:
-                nbh_choice = st.text_input("Masukkan NBH (Ketik Manual)")
+                nbh_choice = st.text_input("Input Manual (KodeToko-NoNRB-Tgl NRB)")
                 
             img_file = st.file_uploader("Upload Bukti Foto", type=["jpg", "jpeg", "png"])
             
