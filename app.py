@@ -56,7 +56,6 @@ if "uploaded_data" not in st.session_state:
     st.session_state.uploaded_data = None  
 if "ic_uploads" not in st.session_state:
     st.session_state.ic_uploads = []  
-# PENAMPUNGAN BARU UNTUK DATA RUSAK PABRIK
 if "rusak_pabrik_uploads" not in st.session_state:
     st.session_state.rusak_pabrik_uploads = []
 
@@ -86,15 +85,8 @@ if not st.session_state.logged_in:
         else:
             st.error("Username atau Password salah. Silakan coba lagi.")
             
-    # --- TAMBAHAN KODE COPYRIGHT DI SINI ---
     st.write("---")
-    st.markdown(
-        """
-        <p style='text-align: center; color: gray; font-size: 13px;'>
-            👮  Inventory Control - Batam 🥇</p>
-        """, 
-        unsafe_allow_html=True
-    )
+    st.markdown("<p style='text-align: center; color: gray; font-size: 13px;'>👮 Inventory Control - Batam 🥇</p>", unsafe_allow_html=True)
 
 # ==========================================
 # 5. HALAMAN DASHBOARD (JIKA SUDAH LOGIN)
@@ -166,7 +158,6 @@ else:
                                 st.error("Foto dihapus.")
                                 st.rerun()
 
-        # MENU BARU ADMIN: MELIHAT RUSAK PABRIK
         with tab3:
             st.header("Laporan Foto Rusak Pabrik dari Toko")
             if not st.session_state.rusak_pabrik_uploads:
@@ -188,7 +179,7 @@ else:
                             st.error("Laporan Rusak Pabrik berhasil dihapus.")
                             st.rerun()
 
-    # ---  IC BATAM ---
+    # --- IC BATAM ---
     elif st.session_state.role == "IC_Batam":
         st.title("📤 IC BATAM")
         tab1, tab2 = st.tabs(["📌 Upload FU NBH", "🔆 Cek Rusak Pabrik (Toko)"])
@@ -201,21 +192,22 @@ else:
                     nbh_options = st.session_state.uploaded_data[kolom_nbh[0]].dropna().unique().tolist()
                     nbh_choice = st.selectbox("Pilih NBH", nbh_options)
                 else:
-                    nbh_choice = st.text_input("Input Manual (KodeToko-NoNRB-Tgl NRB)")
+                    nbh_choice = st.text_input("Input Manual (KodeToko-NoNRB-Tgl NRB)", key="manual_nbh_ic")
             else:
-                nbh_choice = st.text_input("Input Manual (KodeToko-NoNRB-Tgl NRB)")
+                nbh_choice = st.text_input("Input Manual (KodeToko-NoNRB-Tgl NRB)", key="manual_nbh_ic_empty")
                 
-            img_file = st.file_uploader("Upload Bukti Foto", type=["jpg", "jpeg", "png"])
+            img_file = st.file_uploader("Upload Bukti Foto", type=["jpg", "jpeg", "png"], key="upload_img_ic")
             
             if st.button("Submit Upload", type="primary"):
                 if nbh_choice and img_file:
+                    # PERBAIKAN: Baca byte data gambar agar permanen di memori RAM
+                    img_bytes = img_file.read()
                     st.session_state.ic_uploads.append({
                         "nbh": str(nbh_choice),
-                        "image": img_file,
+                        "image": img_bytes,
                         "status": "Selesai"
                     })
-                    st.success("Bukti NBH berhasil dimasukkan! Silakan cek di menu riwayat.")
-                    # st.rerun() <-- DIHAPUS BIAR GAMBAR TIDAK INSTAN TER-RESET OLEH MEMORI STREAMLIT
+                    st.success("Bukti NBH berhasil dimasukkan!")
                 else:
                     st.error("Mohon isi NBH dan upload foto.")
                     
@@ -241,7 +233,6 @@ else:
                                 st.warning("Data dihapus.")
                                 st.rerun()
 
-        # MENU IC: MELIHAT RUSAK PABRIK
         with tab2:
             st.header("Pantau Foto Rusak Pabrik dari Toko")
             if not st.session_state.rusak_pabrik_uploads:
@@ -270,7 +261,7 @@ else:
         with tab2:
             st.header(f"Melihat Data NBH - Toko {kode_toko_anda}")
             if st.session_state.uploaded_data is not None:
-                nama_kolom_toko = st.session_state.uploaded_data.columns[0]
+                nama_kolom_toko = st.session_data = st.session_state.uploaded_data.columns[0]
                 data_toko_ini = st.session_state.uploaded_data[st.session_state.uploaded_data[nama_kolom_toko].astype(str).str.strip().str.upper() == kode_toko_anda]
                 
                 if not data_toko_ini.empty:
@@ -291,13 +282,13 @@ else:
         with tab3:
             st.header("Bukti Chat")
             st.info("Fitur tampilan bukti chat toko.")
-            st.text_area("Catatan/Pesan Toko ke Tim IC", placeholder="Tulis pesan di sini...")
+            st.text_area("Catatan/Pesan Toko ke Tim IC", placeholder="Tulis pesan di sini...", key="chat_toko_area")
 
-        # MENU TOKO: INPUT RUSAK PABRIK & UPLOAD 2 FOTO
         with tab1:
             st.header("Form Input Rusak Pabrik")
             
-            with st.form("form_rusak_pabrik", clear_on_submit=True):
+            # PERBAIKAN: clear_on_submit diubah ke False agar data byte terbaca dulu dengan sempurna
+            with st.form("form_rusak_pabrik", clear_on_submit=False):
                 form_toko = st.text_input("Nama/Kode Toko", value=kode_toko_anda)
                 form_no_nrb = st.text_input("Masukkan No NRB")
                 form_tgl_nrb = st.text_input("Masukkan Tanggal NRB (DD/MM/YYYY)")
@@ -310,13 +301,17 @@ else:
                 
                 if submit_rp:
                     if form_toko and form_no_nrb and form_tgl_nrb and foto_ba and foto_barang:
+                        # PERBAIKAN: Mengamankan file gambar ke bentuk bytes sebelum dimasukkan ke list upload
+                        ba_bytes = foto_ba.read()
+                        barang_bytes = foto_barang.read()
+                        
                         st.session_state.rusak_pabrik_uploads.append({
                             "toko": form_toko.strip().upper(),
                             "no_nrb": form_no_nrb,
                             "tgl_nrb": form_tgl_nrb,
-                            "foto_ba": foto_ba,
-                            "foto_barang": foto_barang
+                            "foto_ba": ba_bytes,
+                            "foto_barang": barang_bytes
                         })
-                        st.success("Laporan Rusak Pabrik berhasil dikirim! Tim Admin dan IC sudah bisa melihat laporan ini.")
+                        st.success("Laporan Rusak Pabrik berhasil dikirim! Silakan cek di Dashboard Admin/IC.")
                     else:
                         st.error("Gagal kirim! Harap isi semua formulir teks dan pastikan kedua foto sudah di-upload.")
