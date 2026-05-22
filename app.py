@@ -5,7 +5,7 @@ import pandas as pd
 # ==========================================
 # 1. KONFIGURASI HALAMAN & PROTEKSI SEAMLESS
 # ==========================================
-st.set_page_config(page_title="MTP Dashboard System", layout="wide")
+st.set_page_config(page_title="IC BATAM", layout="wide")
 
 # Trik Javascript + CSS Kuat untuk Menghapus Paksa Ikon GitHub & Teks Share
 components.html(
@@ -69,10 +69,10 @@ def logout():
 # 4. HALAMAN LOGIN
 # ==========================================
 if not st.session_state.logged_in:
-    st.title("🔒 MTP System Login")
-    st.subheader("Silakan pilih jenis login dan masukkan akun Anda")
+    st.title("💻 IC BATAM")
+    st.subheader("Monitoring Rusak Pabrik dan NBH")
     
-    role_choice = st.selectbox("Jenis Login", ["Admin", "IC Upload", "Toko"])
+    role_choice = st.selectbox("Jenis Login", ["Admin_MTP", "IC_Batam ", "Toko_Batam-Bintan-TJP"])
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     
