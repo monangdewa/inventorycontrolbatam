@@ -91,7 +91,7 @@ if not st.session_state.logged_in:
     st.markdown(
         """
         <p style='text-align: center; color: gray; font-size: 13px;'>
-            👮🏻‍♂️ INVENTORY CONTROL BATAM 🥇</p>
+            👮🏻‍♂️ Inventory Control - Batam 🥇</p>
         """, 
         unsafe_allow_html=True
     )
