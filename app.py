@@ -40,9 +40,9 @@ st.markdown("<style>footer {visibility: hidden !important;}</style>", unsafe_all
 # 2. DATABASE KREDENSIAL
 # ==========================================
 CREDENTIALS = {
-    "Admin": {"user": "MTP", "pwd": "1712"},
-    "IC Upload": {"user": "ICBTM", "pwd": "@ICBTM"},
-    "Toko": {"user": "BTMJUARA", "pwd": "@BTMJUARA"}
+    "Adm_ICBTM": {"user": "MTP", "pwd": "1712"},
+    "IC_Batam": {"user": "ICBTM", "pwd": "@ICBTM"},
+    "Toko_Kepri": {"user": "BTMJUARA", "pwd": "@BTMJUARA"}
 }
 
 # ==========================================
@@ -72,7 +72,7 @@ if not st.session_state.logged_in:
     st.title("💻 IC BATAM")
     st.write("Rekap Rusak Pabrik dan NBH")
     
-    role_choice = st.selectbox("Jenis Login", ["Adm_ICBTM", "IC_Batam ", "Toko_Kepri"])
+    role_choice = st.selectbox("Jenis Login", ["Adm_ICBTM", "IC_Batam", "Toko_Kepri"])
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     
