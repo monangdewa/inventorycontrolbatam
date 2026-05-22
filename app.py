@@ -257,7 +257,7 @@ else:
         
         tab1, tab2, tab3 = st.tabs(["🔆 Rusak Pabrik", "📊 Data NBH", "💬 Bukti Chat"])
         
-        with tab1:
+        with tab2:
             st.header(f"Melihat Data NBH - Toko {kode_toko_anda}")
             if st.session_state.uploaded_data is not None:
                 nama_kolom_toko = st.session_state.uploaded_data.columns[0]
@@ -278,13 +278,13 @@ else:
             else:
                 st.info("Belum ada update bukti fisik dari IC.")
                 
-        with tab2:
+        with tab3:
             st.header("Bukti Chat")
             st.info("Fitur tampilan bukti chat toko.")
             st.text_area("Catatan/Pesan Toko ke Tim IC", placeholder="Tulis pesan di sini...")
 
         # MENU BARU TOKO: INPUT RUSAK PABRIK & UPLOAD 2 FOTO
-        with tab3:
+        with tab1:
             st.header("Form Input Rusak Pabrik")
             
             with st.form("form_rusak_pabrik", clear_on_submit=True):
