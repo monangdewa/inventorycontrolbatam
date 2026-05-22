@@ -85,6 +85,18 @@ if not st.session_state.logged_in:
             st.rerun()
         else:
             st.error("Username atau Password salah. Silakan coba lagi.")
+            
+    # --- TAMBAHAN KODE COPYRIGHT DI SINI ---
+    st.write("---")
+    st.markdown(
+        """
+        <p style='text-align: center; color: gray; font-size: 13px;'>
+            © 2026 IC BATAM.<br>
+            <span style='font-size: 11px;'>Inventory Control - BTM v2.0</span>
+        </p>
+        """, 
+        unsafe_allow_html=True
+    )
 
 # ==========================================
 # 5. HALAMAN DASHBOARD (JIKA SUDAH LOGIN)
@@ -288,13 +300,11 @@ else:
             st.header("Form Input Rusak Pabrik")
             
             with st.form("form_rusak_pabrik", clear_on_submit=True):
-                # Input Teks Form sesuai request
                 form_toko = st.text_input("Nama/Kode Toko", value=kode_toko_anda)
                 form_no_nrb = st.text_input("Masukkan No NRB")
                 form_tgl_nrb = st.text_input("Masukkan Tanggal NRB (DD/MM/YYYY)")
                 
                 st.write("---")
-                # Upload Dua Bukti Foto sesuai request
                 foto_ba = st.file_uploader("1. Upload Foto BA Toko", type=["jpg", "jpeg", "png"], key="ba_toko")
                 foto_barang = st.file_uploader("2. Upload Foto Barang", type=["jpg", "jpeg", "png"], key="brg_toko")
                 
