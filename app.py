@@ -72,7 +72,7 @@ if not st.session_state.logged_in:
     st.title("💻 IC BATAM")
     st.subheader("Monitoring Rusak Pabrik dan NBH")
     
-    role_choice = st.selectbox("Jenis Login", ["Admin_MTP", "IC_Batam ", "Toko_Batam-Bintan-TJP"])
+    role_choice = st.selectbox("Jenis Login", ["Adm_ICBTM", "IC_Batam ", "Toko_Kepri"])
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     
@@ -97,8 +97,8 @@ else:
 
     # --- DASHBOARD ADMIN ---
     if st.session_state.role == "Admin":
-        st.title("🖥️ Dashboard Admin")
-        tab1, tab2, tab3 = st.tabs(["📁 Upload & Kelola CSV", "📸 Cek & Edit Bukti Foto IC", "⚠️ Cek Rusak Pabrik (Toko)"])
+        st.title("🖥️ Admin")
+        tab1, tab2, tab3 = st.tabs(["📁 Upload & Kelola CSV", "📸 Cek & Edit Bukti Foto IC", "🔆 Cek Rusak Pabrik (Toko)"])
         
         with tab1:
             st.header("Upload Data CSV")
@@ -178,13 +178,13 @@ else:
                             st.error("Laporan Rusak Pabrik berhasil dihapus.")
                             st.rerun()
 
-    # --- DASHBOARD IC UPLOAD ---
+    # ---  IC BATAM ---
     elif st.session_state.role == "IC Upload":
-        st.title("📤 Dashboard IC Upload")
-        tab1, tab2 = st.tabs(["📌 Upload Bukti Kerja IC", "⚠️ Cek Rusak Pabrik (Toko)"])
+        st.title("📤 IC BATAM")
+        tab1, tab2 = st.tabs(["📌 Upload FU NBH", "🔆 Cek Rusak Pabrik (Toko)"])
         
         with tab1:
-            st.subheader("Input Bukti Kerja")
+            st.subheader("Upload FU NBH")
             if st.session_state.uploaded_data is not None:
                 kolom_nbh = [col for col in st.session_state.uploaded_data.columns if 'NBH' in col]
                 if kolom_nbh:
@@ -248,14 +248,14 @@ else:
                             st.write("**2. Foto Barang:**")
                             st.image(rp['foto_barang'], width=200)
 
-    # --- DASHBOARD TOKO ---
+    # --- TOKO KEPRI ---
     elif st.session_state.role == "Toko":
-        st.title("🏪 Dashboard Toko")
+        st.title("🏪 Toko BTM-BTN-TJP")
         
         st.subheader("Pengaturan Akses Toko")
         kode_toko_anda = st.text_input("Masukkan Kode Toko Anda:", value="TWSU").strip().upper()
         
-        tab1, tab2, tab3 = st.tabs(["📊 Data NBH", "💬 Bukti Chat", "⚠️ Rusak Pabrik"])
+        tab1, tab2, tab3 = st.tabs(["🔆 Rusak Pabrik", "📊 Data NBH", "💬 Bukti Chat"])
         
         with tab1:
             st.header(f"Melihat Data NBH - Toko {kode_toko_anda}")
