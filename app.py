@@ -42,7 +42,7 @@ st.markdown("<style>footer {visibility: hidden !important;}</style>", unsafe_all
 CREDENTIALS = {
     "Admin": {"user": "MTP", "pwd": "1712"},
     "IC Upload": {"user": "ICBTM", "pwd": "@ICBTM"},
-    "Toko": {"user": "BTMJUARA", "pwd": "BTMJUARA"}
+    "Toko": {"user": "BTMJUARA", "pwd": "@BTMJUARA"}
 }
 
 # ==========================================
@@ -70,7 +70,7 @@ def logout():
 # ==========================================
 if not st.session_state.logged_in:
     st.title("💻 IC BATAM")
-    st.subheader("Monitoring Rusak Pabrik dan NBH")
+    st.subheader("Rekap Rusak Pabrik dan NBH")
     
     role_choice = st.selectbox("Jenis Login", ["Adm_ICBTM", "IC_Batam ", "Toko_Kepri"])
     username = st.text_input("Username")
